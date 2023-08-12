@@ -47,14 +47,15 @@ async def main():
     tasks = [runner.run(distance) for runner in runners]
     results = await asyncio.gather(*tasks)
 
-    sorted_runners = sorted(runners)
+    runner_times = list(zip(runners, results))
+    runner_times.sort(key=lambda x: x[1])
     fastest_time = min(results)
     slowest_time = max(results)
-    time_difference_minutes = (slowest_time - fastest_time) / 60
+    time_difference_minutes = (slowest_time - fastest_time)
 
     print(f'{"Имя":<15} | {"Возвраст":<15} | {"Скорость":<15} | Затраченное время')
-    for i, runner in enumerate(sorted_runners, start=1):
-        print(f"{runner.name:<15} | {runner.age:<15} | {runner.speed_coefficient:<15.2f} | {results[i-1]:.2f}")
+    for i, (runner, result) in enumerate(runner_times, start=1):
+        print(f"{runner.name:<15} | {runner.age:<15} | {runner.speed_coefficient:<15.2f} | {result:.2f}")
 
     print(f"\nВремя между быстрым и медленным бегуном: {time_difference_minutes:.2f} минут")
 
