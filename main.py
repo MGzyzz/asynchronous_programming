@@ -22,7 +22,7 @@ class Runner:
     async def run(self, distance):
         self.speed_coefficient = 5 * self.speed_coefficient
         print(f"\n {'='*40} \nНачало пробежки {self.name} {datetime.now().strftime('%X')}. \nВозвраст {self.age} | Скорость {self.speed_coefficient} km/h\n {'='*40}")
-        time_to_run = distance / self.speed_coefficient * 360
+        time_to_run = distance / self.speed_coefficient * 60
         await asyncio.sleep(time_to_run)
         print(f"\n {'='*40} \n{self.name} закончил пробежку в {datetime.now().strftime('%X')}\n {'='*40}")
         return time_to_run
