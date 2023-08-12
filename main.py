@@ -20,12 +20,11 @@ class Runner:
             return 1.2
 
     async def run(self, distance):
-        speed = 5 * self.speed_coefficient
-        print(f"Начало пробежки {self.name} {datetime.now().strftime('%X')}. \nВозвраст {self.age} | Скорость {speed} km/h\n")
-        time_to_run = distance / speed * 60
-        print(time_to_run)
+        self.speed_coefficient = 5 * self.speed_coefficient
+        print(f"\n {'='*40} \nНачало пробежки {self.name} {datetime.now().strftime('%X')}. \nВозвраст {self.age} | Скорость {self.speed_coefficient} km/h\n {'='*40}")
+        time_to_run = distance / self.speed_coefficient * 360
         await asyncio.sleep(time_to_run)
-        print(f"{self.name} закончил пробежку в {datetime.now().strftime('%X')}")
+        print(f"\n {'='*40} \n{self.name} закончил пробежку в {datetime.now().strftime('%X')}\n {'='*40}")
         return time_to_run
 
     def __lt__(self, other):
@@ -49,8 +48,8 @@ async def main():
     results = await asyncio.gather(*tasks)
 
     sorted_runners = sorted(runners)
-    fastest_time = results[0]
-    slowest_time = results[-1]
+    fastest_time = min(results)
+    slowest_time = max(results)
     time_difference_minutes = (slowest_time - fastest_time) / 60
 
     print(f'{"Имя":<15} | {"Возвраст":<15} | {"Скорость":<15} | Затраченное время')
