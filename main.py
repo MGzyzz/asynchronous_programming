@@ -50,7 +50,7 @@ async def main():
     runner_times.sort(key=lambda x: x[1])
     fastest_time = min(results)
     slowest_time = max(results)
-    time_difference_minutes = (slowest_time - fastest_time)
+    time_difference_minutes = slowest_time - fastest_time
 
     print(f'{"Имя":<15} | {"Возвраст":<15} | {"Скорость":<15} | Затраченное время')
     for i, (runner, result) in enumerate(runner_times, start=1):
