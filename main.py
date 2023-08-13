@@ -27,8 +27,7 @@ class Runner:
         print(f"\n {'='*40} \n{self.name} закончил пробежку в {datetime.now().strftime('%X')}\n {'='*40}")
         return time_to_run
 
-    def __lt__(self, other):
-        return self.age < other.age
+
 
 async def main():
     runners = [
